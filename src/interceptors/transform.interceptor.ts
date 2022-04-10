@@ -17,10 +17,10 @@ export class TransformInterceptor implements NestInterceptor {
         const response = ctx.getResponse();
         const request = ctx.getRequest();
 
-        const statusCode = response.statusCode;
+        const code = response.statusCode;
         const url = request.originalUrl;
         const res = {
-          statusCode,
+          code,
           msg: null,
           success: true,
           data,

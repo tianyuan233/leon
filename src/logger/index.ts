@@ -2,7 +2,7 @@ import * as log4js from 'log4js';
 import * as fs from 'fs-extra';
 import { join } from 'path';
 
-const LOG_DIR_NAME = '/../logs';
+const LOG_DIR_NAME = '../../logs';
 
 fs.ensureDirSync(join(__dirname, LOG_DIR_NAME));
 void ['request', 'response', 'error'].forEach((t) => {
