@@ -5,7 +5,7 @@ import { TransformInterceptor } from './interceptors/transform.interceptor';
 import helmet from 'helmet';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('/api');
+  // app.setGlobalPrefix('/api');
   app.use(helmet());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
