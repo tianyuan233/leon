@@ -1,7 +1,21 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import * as bcrypt from 'bcryptjs';
 @Entity()
 export class User {
+  static async comparePassword(password0, password1) {
+    return bcrypt.compareSync(password0, password1);
+  }
+
+  static encryptPassword(password) {
+    return bcrypt.hashSync(password, 10);
+  }
+
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
