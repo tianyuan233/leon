@@ -1,4 +1,5 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -6,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
+
 @Entity()
 export class User {
   static async comparePassword(password0, password1) {
@@ -20,7 +22,7 @@ export class User {
   id: number;
 
   @Column({ length: 500 })
-  name: string;
+  username: string;
 
   @Column({ length: 500 })
   password: string;
@@ -38,4 +40,10 @@ export class User {
     name: 'update_at',
   })
   updateAt: Date;
+
+  @BeforeInsert()
+  encrypt() {
+    // this.password = bcrypt.hashSync(this.password, 10);
+    this.password = User.encryptPassword(this.password);
+  }
 }
