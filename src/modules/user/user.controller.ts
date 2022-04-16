@@ -15,12 +15,4 @@ export class UserController {
     const res = await this.userService.createUser(user);
     return res;
   }
-
-  @Post('login')
-  async login(@Body() user: Partial<User>) {
-    console.log(user);
-
-    const res = await this.userService.login(user);
-    return res;
-  }
 }

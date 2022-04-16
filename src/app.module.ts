@@ -3,6 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import configuration from './config/configuration';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+
 import path from 'path';
 @Module({
   imports: [
@@ -26,6 +28,7 @@ import path from 'path';
         synchronize: true,
       }),
     }),
+    AuthModule,
     UserModule,
   ],
 })

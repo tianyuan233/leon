@@ -51,7 +51,7 @@ export class UserService {
     return newUser;
   }
 
-  async login(user: Partial<User>): Promise<User> {
+  async login(user: Partial<User>): Promise<Partial<User>> {
     const { username, password } = user;
     if (!username || !password) {
       throw new HttpException('请输入用户名和密码', HttpStatus.BAD_REQUEST);
@@ -68,7 +68,12 @@ export class UserService {
     if (!isValid) {
       throw new HttpException('密码错误', HttpStatus.BAD_REQUEST);
     }
+    const { password: _, ...userInfo } = existUser;
 
-    return existUser;
+    return userInfo;
+  }
+
+  async findById(id): Promise<User> {
+    return this.userRepository.findOne(id);
   }
 }
