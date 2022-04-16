@@ -10,6 +10,12 @@ import * as bcrypt from 'bcryptjs';
 
 @Entity()
 export class User {
+  /**
+   * 比较密码
+   * @param password0 加密前的密码
+   * @param password1 加密后的密码
+   * @returns
+   */
   static async comparePassword(password0, password1) {
     return bcrypt.compareSync(password0, password1);
   }

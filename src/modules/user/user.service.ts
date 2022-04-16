@@ -50,4 +50,25 @@ export class UserService {
     await this.userRepository.save(newUser);
     return newUser;
   }
+
+  async login(user: Partial<User>): Promise<User> {
+    const { username, password } = user;
+    if (!username || !password) {
+      throw new HttpException('请输入用户名和密码', HttpStatus.BAD_REQUEST);
+    }
+
+    const existUser = await this.userRepository.findOne({
+      where: { username },
+    });
+    if (!existUser) {
+      throw new HttpException('用户不存在', HttpStatus.BAD_REQUEST);
+    }
+
+    const isValid = await User.comparePassword(password, existUser.password);
+    if (!isValid) {
+      throw new HttpException('密码错误', HttpStatus.BAD_REQUEST);
+    }
+
+    return existUser;
+  }
 }
