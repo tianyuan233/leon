@@ -28,8 +28,8 @@ import path from 'path';
         synchronize: true,
       }),
     }),
-    AuthModule,
     UserModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
